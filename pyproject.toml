@@ -1,0 +1,22 @@
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+ignore = [
+    "E203",
+]
+# Какие ошибки проверять
+select = ["E", "F", "W", "B", "B9"]
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+skip-string-normalization = false
+
+[tool.isort]
+profile = "black"
+line_length = 88
+known_first_party = ["app"]
+known_third_party = ["fastapi", "sqlalchemy", "pydantic", "asyncpg"]
+multi_line_output = 3
+include_trailing_comma = true

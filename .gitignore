@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite3
+*.sqlite
+pgdata/
+
+# Docker
+*.env
+docker-compose.override.yml
+*.dockerfile
+docker-compose.override.*
+
+# Alembic
+alembic.ini
+migrations/
+
+# Mac/Linux
+.DS_Store
+*.swp
+
+# Testing / coverage
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/

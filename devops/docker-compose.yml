@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:15
+    container_name: incidents_db
+    env_file: ./.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  web:
+    build:
+      context: ..
+      dockerfile: devops/Dockerfile
+    container_name: incidents_web
+    env_file: ./.env
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ../app:/app/app
+      - ./.env:/app/.env
+    working_dir: /app
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    command: >
+      sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    restart: always
+
+volumes:
+  pgdata: {}
